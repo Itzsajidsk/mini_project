@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLAMES Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="top-right-buttons">
+        <!-- <button class="theme-toggle" onclick="toggleTheme()">🌓</button> -->
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+    <h1>FLAMES Relationship Calculator</h1>
+    <p>Enter two names to find out your relationship!</p>
+    <div class="input-container">
+        <input type="text" id="name1" placeholder="Your Name">
+        <input type="text" id="name2" placeholder="Crush's Name">
+    </div>
+    <button onclick="calculateFLAMES()">Find Relationship</button>
+    
+    <!-- display-name UI removed per request -->
+    <h2 id="result"></h2>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Logout function
+        function logout() {
+            fetch("{{ url_for('logout') }}", {
+                method: "GET",
+                credentials: "include"
+            }).then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url; // Redirect to login page
+                }
+            });
+        }
+    </script>
+</body>
+</html>
